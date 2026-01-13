@@ -31,19 +31,22 @@ export default function QuestionCard({ question, index, total, onAnswer, onNext 
   if (!question) return null
 
   return (
-    <section className="card">
-      <div className="meta">Question {index + 1} / {total}</div>
-      <h3 className="question">{question.question}</h3>
+    <section className="bg-white/5 border border-white/5 p-6 rounded-xl mb-4">
+      <div className="text-sm text-slate-400 mb-2">Question {index + 1} / {total}</div>
+      <h3 className="text-lg font-semibold mb-4">{question.question}</h3>
 
-      <div className="options">
+      <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 mb-4">
         {options.map((opt) => {
           const isSelected = selected === opt
           const isCorrect = submitted && opt === question.correct_answer
           const isWrong = submitted && isSelected && opt !== question.correct_answer
+          const base = 'text-left p-3 rounded-md border transition'
+          const stateClass = isCorrect ? 'bg-emerald-800/40 border-emerald-500' : isWrong ? 'bg-rose-800/30 border-rose-500' : isSelected ? 'ring-2 ring-teal-400/30 border-white/10' : 'border-white/10 bg-transparent'
+
           return (
             <button
               key={opt}
-              className={`option ${isSelected ? 'selected' : ''} ${isCorrect ? 'correct' : ''} ${isWrong ? 'wrong' : ''}`}
+              className={`${base} ${stateClass} text-slate-100`}
               onClick={() => choose(opt)}
             >
               {opt}
@@ -52,16 +55,17 @@ export default function QuestionCard({ question, index, total, onAnswer, onNext 
         })}
       </div>
 
-      <div className="form-actions">
+      <div className="flex items-center gap-3">
         {!submitted && (
-          <button onClick={submit} className="primary" disabled={selected == null}>
+          <button onClick={submit} className="bg-teal-400 text-slate-900 px-4 py-2 rounded-md disabled:opacity-60" disabled={selected == null}>
             Submit
           </button>
         )}
+
         {submitted && (
           <>
-            <div className="feedback">{selected === question.correct_answer ? 'Correct!' : `Incorrect — correct: ${question.correct_answer}`}</div>
-            <button onClick={next}>Next</button>
+            <div className="text-sm text-slate-300 mr-auto">{selected === question.correct_answer ? 'Correct!' : `Incorrect — correct: ${question.correct_answer}`}</div>
+            <button onClick={next} className="px-4 py-2 rounded-md border border-white/6">Next</button>
           </>
         )}
       </div>
