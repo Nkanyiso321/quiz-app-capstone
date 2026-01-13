@@ -9,9 +9,9 @@ export default function History() {
   }, [])
 
   if (!history.length) return (
-    <section className="card">
-      <h2>History</h2>
-      <p>No quiz history yet.</p>
+    <section className="bg-white/5 border border-white/5 p-6 rounded-xl mb-4">
+      <h2 className="text-xl font-medium">History</h2>
+      <p className="mt-3 text-slate-300">No quiz history yet.</p>
     </section>
   )
 
@@ -19,17 +19,17 @@ export default function History() {
   const best = Math.max(...history.map((h) => (h.score / h.total) * 100))
 
   return (
-    <section className="card">
-      <h2>History</h2>
-      <div className="stats">Average: {avg.toFixed(0)}% • Best: {best.toFixed(0)}%</div>
-      <ul className="history-list">
+    <section className="bg-white/5 border border-white/5 p-6 rounded-xl mb-4">
+      <h2 className="text-xl font-medium">History</h2>
+      <div className="text-sm text-slate-300 mt-2">Average: {avg.toFixed(0)}% • Best: {best.toFixed(0)}%</div>
+      <ul className="mt-4 divide-y divide-white/5">
         {history.map((h) => (
-          <li key={h.id} className="history-item">
-            <div className="hist-meta">
-              <div>{new Date(h.date).toLocaleString()}</div>
-              <div>{h.category} • {h.difficulty}</div>
+          <li key={h.id} className="py-3 flex items-center justify-between">
+            <div>
+              <div className="text-sm text-slate-200">{new Date(h.date).toLocaleString()}</div>
+              <div className="text-sm text-slate-400">{h.category} • {h.difficulty}</div>
             </div>
-            <div className="hist-score">{h.score} / {h.total}</div>
+            <div className="font-medium text-slate-100">{h.score} / {h.total}</div>
           </li>
         ))}
       </ul>
