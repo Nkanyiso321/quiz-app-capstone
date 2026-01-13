@@ -5,6 +5,57 @@
 @layer base {
   html, body, #root { height: 100%; }
   body { background-image: linear-gradient(180deg,#071024 0%, #061126 100%); color: #e6eef8; -webkit-font-smoothing:antialiased; }
-  /* small helper to ensure focus outlines are visible */
-  :focus { outline: 2px solid rgba(6,182,212,0.25); outline-offset: 2px; }
 }
+
+/* Plain CSS equivalents (avoiding @apply so PostCSS/Tailwind doesn't error) */
+.app-root{
+  max-width:900px;
+  margin:24px auto;
+  padding:16px;
+}
+
+.app-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:16px;
+}
+
+.card{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.04);
+  padding:18px;
+  border-radius:10px;
+  margin-bottom:12px;
+}
+
+.form-row{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.form-row input, .form-row select{padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit}
+.form-actions{display:flex;gap:8px;align-items:center}
+.primary{background:#06b6d4;color:#021226;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
+.primary[disabled]{opacity:0.6;cursor:not-allowed}
+
+.options{display:grid;grid-template-columns:1fr;gap:8px;margin:12px 0}
+.option{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;text-align:left;cursor:pointer}
+.option.selected{outline:2px solid rgba(6,182,212,0.15)}
+.option.correct{background:rgba(22,163,74,0.12);border-color:rgba(22,163,74,0.3)}
+.option.wrong{background:rgba(239,68,68,0.08);border-color:rgba(239,68,68,0.3)}
+
+.feedback{margin-right:auto;color:#94a3b8}
+.big{font-size:1.5rem;margin:8px 0}
+
+.review-list{list-style:none;padding:0;margin:0}
+.review-item{padding:8px;border-top:1px solid rgba(255,255,255,0.02)}
+
+.history-list{list-style:none;padding:0;margin:0}
+.history-item{display:flex;justify-content:space-between;padding:8px;border-top:1px solid rgba(255,255,255,0.02)}
+
+@media (min-width:640px){
+  .options{grid-template-columns:1fr 1fr}
+}
+
+.app-footer{margin-top:16px;text-align:center;color:#94a3b8}
+
+.error{color:#ef4444;margin-bottom:8px}
+.note{margin-top:8px;color:#94a3b8}

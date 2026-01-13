@@ -74,9 +74,9 @@ export default function App() {
     const entry = {
       id: Date.now(),
       date: new Date().toISOString(),
-      category: quizConfig?.categoryName || 'Any',
-      difficulty: quizConfig?.difficulty || 'Any',
-      amount: quizConfig?.amount,
+      category: quizConfig.categoryName || 'Any',
+      difficulty: quizConfig.difficulty || 'Any',
+      amount: quizConfig.amount,
       score,
       total: questions.length
     }
@@ -85,16 +85,16 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-slate-100 antialiased py-6 px-4">
-      <header className="max-w-3xl mx-auto flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-semibold">Quiz App</h1>
-        <nav className="space-x-2">
-          <button onClick={() => setView('start')} className="text-sm px-3 py-1 rounded hover:bg-white/5">Home</button>
-          <button onClick={() => setView('history')} className="text-sm px-3 py-1 rounded hover:bg-white/5">History</button>
+    <div className="app-root">
+      <header className="app-header">
+        <h1>Quiz App</h1>
+        <nav>
+          <button onClick={() => setView('start')}>Home</button>
+          <button onClick={() => setView('history')}>History</button>
         </nav>
       </header>
 
-      <main className="max-w-3xl mx-auto">
+      <main className="app-main">
         {view === 'start' && (
           <QuizStart
             categories={categories}
@@ -134,7 +134,7 @@ export default function App() {
         {view === 'history' && <History />}
       </main>
 
-      <footer className="max-w-3xl mx-auto mt-6 text-center text-sm text-slate-400">
+      <footer className="app-footer">
         <small>Powered by Open Trivia DB • Frontend Capstone</small>
       </footer>
     </div>
